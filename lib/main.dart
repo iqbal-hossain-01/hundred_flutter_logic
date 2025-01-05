@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hundred_flutter_logic/core/widgets/home_page_item_view.dart';
+import 'package:hundred_flutter_logic/features/auth_logic/pages/email_verification_page.dart';
 import 'package:hundred_flutter_logic/features/auth_logic/pages/login_logic.dart';
+import 'package:hundred_flutter_logic/features/auth_logic/pages/otp_verification_page.dart';
 import 'package:hundred_flutter_logic/features/auth_logic/pages/password_reset_logic.dart';
 import 'package:hundred_flutter_logic/features/auth_logic/pages/session_management_page.dart';
 import 'package:hundred_flutter_logic/features/auth_logic/pages/signin_logic.dart';
@@ -33,6 +35,8 @@ class MyApp extends StatelessWidget {
         LoginLogic.routeName: (context) => const LoginLogic(),
         SignInLogic.routeName: (context) => const SignInLogic(),
         PasswordResetLogic.routeName: (context) => const PasswordResetLogic(),
+        EmailVerificationPage.routeName: (context) => const EmailVerificationPage(),
+        OtpVerificationPage.routeName: (context) => const OtpVerificationPage(),
       },
     );
   }
@@ -76,6 +80,18 @@ class MyHomePage extends StatelessWidget {
               Navigator.pushNamed(context, SessionManagementPage.routeName);
             },
             title: 'Go to Session Management Page',
+          ),
+          HomePageItemView(
+            routeName: () {
+              Navigator.pushNamed(context, EmailVerificationPage.routeName);
+            },
+            title: 'Go to email verification Page',
+          ),
+          HomePageItemView(
+            routeName: () {
+              Navigator.pushNamed(context, OtpVerificationPage.routeName);
+            },
+            title: 'Go to OTP verification Page',
           ),
         ],
       ),
