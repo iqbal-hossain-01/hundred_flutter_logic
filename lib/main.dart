@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hundred_flutter_logic/core/widgets/home_page_item_view.dart';
 import 'package:hundred_flutter_logic/features/auth_logic/pages/login_logic.dart';
+import 'package:hundred_flutter_logic/features/auth_logic/pages/password_reset_logic.dart';
+import 'package:hundred_flutter_logic/features/auth_logic/pages/session_management_page.dart';
 import 'package:hundred_flutter_logic/features/auth_logic/pages/signin_logic.dart';
 import 'package:hundred_flutter_logic/firebase_options.dart';
 
@@ -26,16 +28,18 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: MyHomePage.routeName,
       routes: {
+        SessionManagementPage.routeName: (context) => const SessionManagementPage(),
         MyHomePage.routeName: (context) => const MyHomePage(),
         LoginLogic.routeName: (context) => const LoginLogic(),
         SignInLogic.routeName: (context) => const SignInLogic(),
+        PasswordResetLogic.routeName: (context) => const PasswordResetLogic(),
       },
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
-  static const String routeName = '/';
+  static const String routeName = '/home';
 
   const MyHomePage({super.key});
 
@@ -59,7 +63,19 @@ class MyHomePage extends StatelessWidget {
             routeName: () {
               Navigator.pushNamed(context, SignInLogic.routeName);
             },
-            title: 'Go to SignIn   Page',
+            title: 'Go to SignIn Page',
+          ),
+          HomePageItemView(
+            routeName: () {
+              Navigator.pushNamed(context, PasswordResetLogic.routeName);
+            },
+            title: 'Go to Password Reset Page',
+          ),
+          HomePageItemView(
+            routeName: () {
+              Navigator.pushNamed(context, SessionManagementPage.routeName);
+            },
+            title: 'Go to Session Management Page',
           ),
         ],
       ),

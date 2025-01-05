@@ -32,6 +32,8 @@ class _LoginLogicState extends State<LoginLogic> {
           content: Text('Login Failed: $e'),
         ),
       );
+    } finally {
+      Navigator.pop(context);
     }
   }
 
