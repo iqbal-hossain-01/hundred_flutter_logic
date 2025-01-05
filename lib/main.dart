@@ -1,6 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:hundred_flutter_logic/core/widgets/home_page_item_view.dart';
+import 'package:hundred_flutter_logic/features/auth_logic/pages/login_logic.dart';
+import 'package:hundred_flutter_logic/features/auth_logic/pages/signin_logic.dart';
+import 'package:hundred_flutter_logic/firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
@@ -11,58 +18,51 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'Hundred Logic App',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      initialRoute: MyHomePage.routeName,
+      routes: {
+        MyHomePage.routeName: (context) => const MyHomePage(),
+        LoginLogic.routeName: (context) => const LoginLogic(),
+        SignInLogic.routeName: (context) => const SignInLogic(),
+      },
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
+class MyHomePage extends StatelessWidget {
+  static const String routeName = '/';
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  const MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+        title: const Text('Hundred Logic App'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
+      body: ListView(
+        padding: const EdgeInsets.all(16.0),
+        children: [
+          HomePageItemView(
+            routeName: () {
+              Navigator.pushNamed(context, LoginLogic.routeName);
+            },
+            title: 'Go to Login Page',
+          ),
+          HomePageItemView(
+            routeName: () {
+              Navigator.pushNamed(context, SignInLogic.routeName);
+            },
+            title: 'Go to SignIn   Page',
+          ),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
