@@ -1,6 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hundred_flutter_logic/core/widgets/home_page_item_view.dart';
+import 'package:hundred_flutter_logic/features/api_logic/pages/api_show_result_page.dart';
+import 'package:hundred_flutter_logic/features/api_logic/pages/create_post_page.dart';
+import 'package:hundred_flutter_logic/features/api_logic/pages/pagination_page.dart';
 import 'package:hundred_flutter_logic/features/auth_logic/pages/email_verification_page.dart';
 import 'package:hundred_flutter_logic/features/auth_logic/pages/login_logic.dart';
 import 'package:hundred_flutter_logic/features/auth_logic/pages/otp_verification_page.dart';
@@ -37,6 +40,9 @@ class MyApp extends StatelessWidget {
         PasswordResetLogic.routeName: (context) => const PasswordResetLogic(),
         EmailVerificationPage.routeName: (context) => const EmailVerificationPage(),
         OtpVerificationPage.routeName: (context) => const OtpVerificationPage(),
+        ApiShowResultPage.routeName: (context) => const ApiShowResultPage(),
+        CreatePostPage.routeName: (context) => const CreatePostPage(),
+        PaginationPage.routeName: (context) => const PaginationPage(),
       },
     );
   }
@@ -92,6 +98,24 @@ class MyHomePage extends StatelessWidget {
               Navigator.pushNamed(context, OtpVerificationPage.routeName);
             },
             title: 'Go to OTP verification Page',
+          ),
+          HomePageItemView(
+            routeName: () {
+              Navigator.pushNamed(context, ApiShowResultPage.routeName);
+            },
+            title: 'Go to Api Get Page',
+          ),
+          HomePageItemView(
+            routeName: () {
+              Navigator.pushNamed(context, CreatePostPage.routeName);
+            },
+            title: 'Go to Post_Put_Delete Page',
+          ),
+          HomePageItemView(
+            routeName: () {
+              Navigator.pushNamed(context, PaginationPage.routeName);
+            },
+            title: 'Go to Pagination Page',
           ),
         ],
       ),
