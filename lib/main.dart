@@ -1,9 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hundred_flutter_logic/core/widgets/home_page_item_view.dart';
+import 'package:hundred_flutter_logic/features/api_logic/dummyjson_app/dummy_json_app.dart';
+import 'package:hundred_flutter_logic/features/api_logic/dummyjson_app/dummy_json_app_details.dart';
+import 'package:hundred_flutter_logic/features/api_logic/dummyjson_app/dummyjson_home.dart';
 import 'package:hundred_flutter_logic/features/api_logic/pages/api_show_result_page.dart';
 import 'package:hundred_flutter_logic/features/api_logic/pages/create_post_page.dart';
 import 'package:hundred_flutter_logic/features/api_logic/pages/pagination_page.dart';
+import 'package:hundred_flutter_logic/features/api_logic/provider/product_provider.dart';
 import 'package:hundred_flutter_logic/features/auth_logic/pages/email_verification_page.dart';
 import 'package:hundred_flutter_logic/features/auth_logic/pages/login_logic.dart';
 import 'package:hundred_flutter_logic/features/auth_logic/pages/otp_verification_page.dart';
@@ -11,11 +15,19 @@ import 'package:hundred_flutter_logic/features/auth_logic/pages/password_reset_l
 import 'package:hundred_flutter_logic/features/auth_logic/pages/session_management_page.dart';
 import 'package:hundred_flutter_logic/features/auth_logic/pages/signin_logic.dart';
 import 'package:hundred_flutter_logic/firebase_options.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ProductProvider(),)
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -33,16 +45,20 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: MyHomePage.routeName,
       routes: {
-        SessionManagementPage.routeName: (context) => const SessionManagementPage(),
+        SessionManagementPage.routeName: (context) =>
+            const SessionManagementPage(),
         MyHomePage.routeName: (context) => const MyHomePage(),
         LoginLogic.routeName: (context) => const LoginLogic(),
         SignInLogic.routeName: (context) => const SignInLogic(),
         PasswordResetLogic.routeName: (context) => const PasswordResetLogic(),
-        EmailVerificationPage.routeName: (context) => const EmailVerificationPage(),
+        EmailVerificationPage.routeName: (context) =>
+            const EmailVerificationPage(),
         OtpVerificationPage.routeName: (context) => const OtpVerificationPage(),
         ApiShowResultPage.routeName: (context) => const ApiShowResultPage(),
         CreatePostPage.routeName: (context) => const CreatePostPage(),
         PaginationPage.routeName: (context) => const PaginationPage(),
+        //DummyJsonHome.routeName: (context) => const DummyJsonHome(),
+        DummyJsonApp.routeName: (context) => const DummyJsonApp(),
       },
     );
   }
@@ -116,6 +132,18 @@ class MyHomePage extends StatelessWidget {
               Navigator.pushNamed(context, PaginationPage.routeName);
             },
             title: 'Go to Pagination Page',
+          ),
+          // HomePageItemView(
+          //   routeName: () {
+          //     Navigator.pushNamed(context, DummyJsonHome.routeName);
+          //   },
+          //   title: 'Go to DummyJsonApi Page',
+          // ),
+          HomePageItemView(
+            routeName: () {
+              Navigator.pushNamed(context, DummyJsonApp.routeName);
+            },
+            title: 'Go to DummyJson App',
           ),
         ],
       ),
