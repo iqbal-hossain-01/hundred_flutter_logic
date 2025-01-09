@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:hundred_flutter_logic/features/api_logic/dummyjson_app/add_product_page.dart';
 import 'package:hundred_flutter_logic/features/api_logic/dummyjson_app/dummy_json_app_details.dart';
 import 'package:hundred_flutter_logic/features/api_logic/provider/product_provider.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +16,14 @@ class DummyJsonApp extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('DummyJson App'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const AddProductPage(),));
+            },
+            icon: const Icon(Icons.add),
+          )
+        ],
       ),
       body: productProvider.isLoading
           ? const Center(child: CircularProgressIndicator())

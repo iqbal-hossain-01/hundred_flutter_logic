@@ -57,8 +57,14 @@ class MyApp extends StatelessWidget {
         ApiShowResultPage.routeName: (context) => const ApiShowResultPage(),
         CreatePostPage.routeName: (context) => const CreatePostPage(),
         PaginationPage.routeName: (context) => const PaginationPage(),
-        //DummyJsonHome.routeName: (context) => const DummyJsonHome(),
         DummyJsonApp.routeName: (context) => const DummyJsonApp(),
+
+        /*
+        // Other page but not using NamedRouting:
+        //DummyJsonHome.routeName: (context) => const DummyJsonHome(),
+        // AddProductPage()
+        // DummyJsonAppDetails()
+         */
       },
     );
   }

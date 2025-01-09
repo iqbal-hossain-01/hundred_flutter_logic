@@ -37,9 +37,9 @@ class _DummyJsonAppDetailsState extends State<DummyJsonAppDetails> {
           : singleProduct == null
               ? const Center(child: Text('Product not found'))
               : Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SingleChildScrollView(
-                  child: Column(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SingleChildScrollView(
+                    child: Column(
                       children: [
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
@@ -51,10 +51,13 @@ class _DummyJsonAppDetailsState extends State<DummyJsonAppDetails> {
                                   height: 200,
                                   fit: BoxFit.cover,
                                   fadeInCurve: Curves.bounceInOut,
-                                  fadeInDuration: const Duration(milliseconds: 1000),
+                                  fadeInDuration:
+                                      const Duration(milliseconds: 1000),
                                   imageUrl: singleProduct.thumbnail ?? '',
-                                  placeholder: (context, url) => const CircularProgressIndicator(),
-                                  errorWidget: (context, url, error) => const Icon(Icons.error_outline),
+                                  placeholder: (context, url) =>
+                                      const CircularProgressIndicator(),
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(Icons.error_outline),
                                 ),
                               ),
                               if (singleProduct.images != null)
@@ -65,18 +68,24 @@ class _DummyJsonAppDetailsState extends State<DummyJsonAppDetails> {
                                       height: 200,
                                       fit: BoxFit.cover,
                                       fadeInCurve: Curves.bounceInOut,
-                                      fadeInDuration: const Duration(milliseconds: 1000),
+                                      fadeInDuration:
+                                          const Duration(milliseconds: 1000),
                                       imageUrl: image,
-                                      placeholder: (context, url) => const CircularProgressIndicator(),
-                                      errorWidget: (context, url, error) => const Icon(Icons.error_outline),
+                                      placeholder: (context, url) =>
+                                          const CircularProgressIndicator(),
+                                      errorWidget: (context, url, error) =>
+                                          const Icon(Icons.error_outline),
                                     ),
                                   ),
                             ],
                           ),
                         ),
-                        Text(singleProduct.title!, style: Theme.of(context).textTheme.titleMedium),
-                        Text('\$${singleProduct.price!}', style: Theme.of(context).textTheme.titleMedium),
-                        Text(singleProduct.description!, textAlign: TextAlign.justify),
+                        Text(singleProduct.title!,
+                            style: Theme.of(context).textTheme.titleMedium),
+                        Text('\$${singleProduct.price!}',
+                            style: Theme.of(context).textTheme.titleMedium),
+                        Text(singleProduct.description!,
+                            textAlign: TextAlign.justify),
                         ListTile(
                           title: const Text('Category'),
                           subtitle: Text(singleProduct.category!),
@@ -89,11 +98,10 @@ class _DummyJsonAppDetailsState extends State<DummyJsonAppDetails> {
                           title: const Text('Stock'),
                           subtitle: Text('${singleProduct.stock!}'),
                         ),
-                  
                       ],
                     ),
+                  ),
                 ),
-              ),
     );
   }
 }

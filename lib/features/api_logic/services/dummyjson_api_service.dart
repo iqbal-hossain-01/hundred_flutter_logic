@@ -41,7 +41,23 @@ class DummyJsonApiService {
     }
   }
 
-
+  // Post request
+  Future<Map<String, dynamic>> createProduct(Map<String, dynamic> productMap) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/products/add'),
+        headers: {'Content-type': 'application/json'},
+        body: jsonEncode(productMap),
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return jsonDecode(response.body);
+      } else {
+        throw Exception('Failed to create post');
+      }
+    } catch (e) {
+      throw Exception('Error: $e');
+    }
+  }
 
   // Post request
   /*
